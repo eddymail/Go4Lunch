@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/auth_background"
-    android:backgroundTint="#D3090909"
-    android:backgroundTintMode="multiply"
+    android:backgroundTint="#CE090909"
+    android:backgroundTintMode="src_over"
     android:orientation="vertical"
     tools:context=".view.AuthActivity">
 
@@ -39,9 +39,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="20dp"
         android:gravity="bottom"
-        android:orientation="vertical"
-        android:layout_margin="20dp">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/auth_activity_google_button"

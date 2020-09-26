@@ -2,6 +2,7 @@ package com.lousssouarn.edouard.go4lunch.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +35,13 @@ public class AuthActivity extends AppCompatActivity {
                 startSignInWithGoogle();
             }
         });
+
+        facebookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startSignInWithFacebook();
+            }
+        });
     }
 
     /**
@@ -60,5 +68,11 @@ public class AuthActivity extends AppCompatActivity {
                                 new AuthUI.IdpConfig.FacebookBuilder().build()))
                         .setIsSmartLockEnabled(false, true)
                         .build(), RC_SIGN);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 }

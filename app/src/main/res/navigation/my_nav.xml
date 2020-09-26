@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/mapViewFragment">
+    <fragment
+        android:id="@+id/mapViewFragment"
+        android:name="com.lousssouarn.edouard.go4lunch.MapViewFragment"
+        android:label="fragment_map_view"
+        tools:layout="@layout/fragment_map_view" />
+    <fragment
+        android:id="@+id/listViewFragment"
+        android:name="com.lousssouarn.edouard.go4lunch.ListViewFragment"
+        android:label="fragment_list_view"
+        tools:layout="@layout/fragment_list_view" />
+    <fragment
+        android:id="@+id/workmatesListFragment"
+        android:name="com.lousssouarn.edouard.go4lunch.WorkmatesListFragment"
+        android:label="fragment_workmates_list"
+        tools:layout="@layout/fragment_workmates_list" />
+</navigation>
