@@ -18,23 +18,23 @@ public class SplashActivity extends AppCompatActivity {
         checkUserLogged();
     }
 
+    /**
+     * If User is logged lauch MainActivity, if not lauch AuthActivity
+     */
     public void checkUserLogged() {
-        //Launch Sign-In Activity if user not connected
         if (this.isCurrentUserLogged()) {
-            this.startMainActicity();
+            this.startMainActivity();
         }else{
             this.startAuthActivity();
         }
     }
 
-    //Launching MainActivity
-    private void startMainActicity(){
+    private void startMainActivity(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    //Launching  AuthActivity
     private void startAuthActivity(){
         Intent intent = new Intent(this, AuthActivity.class);
         startActivity(intent);

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.lousssouarn.edouard.go4lunch.R;
@@ -70,9 +71,33 @@ public class AuthActivity extends AppCompatActivity {
                         .build(), RC_SIGN);
     }
 
+    /**
+     * Use it for the Response of SignIn
+     */
+    private void responseSignIn(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == RC_SIGN)
+        {
+            if (resultCode == RESULT_OK)
+            {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.response_sign_in_success),Toast.LENGTH_SHORT ).show();
+                startMainActivity();
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.response_sign_in_error),Toast.LENGTH_SHORT ).show();
+            }
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        this.responseSignIn(requestCode,resultCode, data);
+    }
+    private void startMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

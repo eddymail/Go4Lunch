@@ -46,4 +46,11 @@ dependencies {
     // FACEBOOK LOGIN SUPPORT
     implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
 
+    // GOOGLE MAPS
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+
+    // DEXTER runtime permissions
+    implementation 'com.karumi:dexter:4.2.0'
+
 }

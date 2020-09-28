@@ -11,6 +11,10 @@
     <string name="facebook_application_id" translatable="false">1441371199385855</string>
     <string name="facebook_login_protocol_scheme" translatable="false" tools:ignore="UnusedResources">fb1441371199385855</string>
 
+    <!-- RESPONSE SIGN IN -->
+    <string name="response_sign_in_success">Connection success</string>
+    <string name="response_sign_in_error">Connection error</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
