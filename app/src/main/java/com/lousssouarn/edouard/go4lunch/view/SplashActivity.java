@@ -1,27 +1,26 @@
 package com.lousssouarn.edouard.go4lunch.view;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.lousssouarn.edouard.go4lunch.R;
 
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        checkUserLogged();
+        checkIfUserLogged();
     }
 
     /**
      * If User is logged lauch MainActivity, if not lauch AuthActivity
      */
-    public void checkUserLogged() {
+    public void checkIfUserLogged() {
         if (this.isCurrentUserLogged()) {
             this.startMainActivity();
         }else{

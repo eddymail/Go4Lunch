@@ -11,23 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -48,6 +41,7 @@ public class MapViewFragment extends Fragment {
     LocationManager locationManager;
     LocationListener locationListener;
     LatLng userLatLng;
+    FloatingActionButton locationButton;
 
 
     public MapViewFragment() {
@@ -64,8 +58,18 @@ public class MapViewFragment extends Fragment {
         //Initialize view
         View v = inflater.inflate(R.layout.fragment_map_view, container, false);
 
+        locationButton = (FloatingActionButton) v.findViewById(R.id.fab_gps_location);
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                map.moveCamera(CameraUpdateFactory.newLatLng(userLatLng));
+            }
+        });
+
         //Initialize map fragment
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+
+
 
         //Async map
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -82,8 +86,6 @@ public class MapViewFragment extends Fragment {
                         // clear old location marker in google map
                         map.clear();
                         map.addMarker(new MarkerOptions().position(userLatLng).title("Your Location"));
-                        map.moveCamera(CameraUpdateFactory.newLatLng(userLatLng));
-
 
                     }
 
@@ -110,7 +112,7 @@ public class MapViewFragment extends Fragment {
         });
 
         return v;
-    }
+}
 
     private void askLocationPermission() {
         Dexter.withActivity(getActivity()).withPermission(Manifest.permission.ACCESS_FINE_LOCATION).withListener(new PermissionListener() {
