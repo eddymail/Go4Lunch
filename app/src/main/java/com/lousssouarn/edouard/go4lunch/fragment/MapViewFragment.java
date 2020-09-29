@@ -134,6 +134,9 @@ public class MapViewFragment extends Fragment {
                 map.clear();
                 map.addMarker(new MarkerOptions().position(userLatLng).title("Your Location"));
                 map.moveCamera(CameraUpdateFactory.newLatLng(userLatLng));
+                //Zoom on location
+                float zoomLevel = 16.0f;
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, zoomLevel));
             }
 
             @Override
