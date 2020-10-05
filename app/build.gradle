@@ -50,6 +50,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
 
+    // GOOGLE PLACES
+    implementation 'com.google.android.libraries.places:places:2.4.0'
+
     // DEXTER runtime permissions
     implementation 'com.karumi:dexter:4.2.0'
 
