@@ -12,11 +12,11 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,9 +28,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
 
     //FOR DATA
-    LatLng searchLocationLatLng;
-    MapFragment mapFragment;
-
+    GoogleMap map;
     //FOR DESIGN
     BottomNavigationView bottomNavigationView;
     NavController navController;
@@ -65,15 +63,34 @@ public class MainActivity extends AppCompatActivity {
     private void setupAutoCompleteSupportFragment() {
         // Initialize the AutocompleteSupportFragment
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS, Place.Field.OPENING_HOURS, Place.Field.PHOTO_METADATAS, Place.Field.RATING));
+        autocompleteFragment.setTypeFilter(TypeFilter.ESTABLISHMENT);
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID,
+                Place.Field.NAME,
+                Place.Field.LAT_LNG,
+                Place.Field.ADDRESS,
+                Place.Field.OPENING_HOURS,
+                Place.Field.PHOTO_METADATAS,
+                Place.Field.RATING));
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
+
                 // TODO: Get info about the selected place.
-                searchLocationLatLng = place.getLatLng();
-                
+                place.getId();
+                String name = place.getName();
+                LatLng inputLatLng =  place.getLatLng();
+                place.getAddress();
+                place.getOpeningHours();
+                place.getPhotoMetadatas();
+                place.getRating();
+
+                Bundle args = new Bundle();
+                args.putParcelable("LatLng", inputLatLng);
+                args.putString("Name", name);
+                MapViewFragment fragment = new MapViewFragment();
+                fragment.setArguments(args);
+                //fragment.loadMap();
             }
 
             @Override

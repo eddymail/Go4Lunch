@@ -26,6 +26,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lousssouarn.edouard.go4lunch.R;
 
+import javax.xml.namespace.QName;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MapViewFragment#} factory method to
@@ -38,6 +40,8 @@ public class MapViewFragment extends Fragment implements LocationListener {
     private SupportMapFragment supportMapFragment;
     LocationManager locationManager;
     LatLng userLatLng;
+    LatLng latLngPlace;
+    String name;
     FloatingActionButton locationButton;
     View mapView;
 
@@ -49,6 +53,11 @@ public class MapViewFragment extends Fragment implements LocationListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(getArguments() != null) {
+        latLngPlace = getArguments().getParcelable("LatLng");
+        name = getArguments().getString("Name");
+        }
     }
 
     @Override
@@ -116,14 +125,12 @@ public class MapViewFragment extends Fragment implements LocationListener {
 
         //Initialize map fragment
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-
         mapView = supportMapFragment.getView();
-
         return v;
     }
 
     @SuppressLint("MissingPermission")
-    private void loadMap() {
+    public void loadMap() {
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
 
             @Override
@@ -135,15 +142,13 @@ public class MapViewFragment extends Fragment implements LocationListener {
                 //clear old location marker in google map
                 map.clear();
                 map.addMarker(new MarkerOptions().position(userLatLng).title("Your Location"));
-                // Location button
-                View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
-                RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
-                // position on right bottom
-                rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-                rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);rlp.setMargins(0,0,30,300);
-                map.setMyLocationEnabled(true);
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 16));
-
+                if (latLngPlace == null) {
+                    map.addMarker(new MarkerOptions().position(userLatLng).title("Your Location"));
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 16));
+                } else {
+                    map.addMarker(new MarkerOptions().position(latLngPlace).title(name));
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngPlace, 16));
+                }
             }
         });
     }
