@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -25,8 +24,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lousssouarn.edouard.go4lunch.R;
-
-import javax.xml.namespace.QName;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -136,6 +133,10 @@ public class MapViewFragment extends Fragment implements LocationListener {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 map = googleMap;
+                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                /*MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(requireContext(), R.raw.google_style);
+                map.setMapStyle(mapStyleOptions);
+                 */
                 //getting user last location to set the default location marker in the map
                 Location lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 userLatLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
