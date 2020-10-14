@@ -22,8 +22,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lousssouarn.edouard.go4lunch.R;
+import com.lousssouarn.edouard.go4lunch.utils.PlaceListener;
+import com.lousssouarn.edouard.go4lunch.view.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,20 +44,28 @@ public class MapViewFragment extends Fragment implements LocationListener {
     String name;
     FloatingActionButton locationButton;
     View mapView;
-
+    private MainActivity mainActivity;
+    private PlaceListener placeListener = new PlaceListener() {
+        @Override
+        public void onPlace(Place place) {
+           latLngPlace =  place.getLatLng();
+           name = place.getName();
+        }
+    };
 
     public MapViewFragment() {
     }
 
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        mainActivity = (MainActivity) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(getArguments() != null) {
-        latLngPlace = getArguments().getParcelable("LatLng");
-        name = getArguments().getString("Name");
-        }
     }
 
     @Override
@@ -104,7 +115,6 @@ public class MapViewFragment extends Fragment implements LocationListener {
         if (locationManager != null) {
             locationManager.removeUpdates(this);
         }
-
     }
 
     @Override
@@ -120,10 +130,18 @@ public class MapViewFragment extends Fragment implements LocationListener {
             }
         });
 
+        mainActivity.addListener(placeListener);
+
         //Initialize map fragment
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapView = supportMapFragment.getView();
         return v;
+    }
+
+    @Override
+    public void onDestroyView(){
+        super.onDestroyView();
+        mainActivity.removeListener(placeListener);
     }
 
     @SuppressLint("MissingPermission")

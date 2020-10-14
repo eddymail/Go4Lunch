@@ -10,10 +10,6 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.model.TypeFilter;
@@ -21,14 +17,17 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lousssouarn.edouard.go4lunch.R;
-import com.lousssouarn.edouard.go4lunch.fragment.MapViewFragment;
+import com.lousssouarn.edouard.go4lunch.utils.PlaceListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     //FOR DATA
-    GoogleMap map;
+    Place place = null;
+    List<PlaceListener> placeListeners = new ArrayList<>();
     //FOR DESIGN
     BottomNavigationView bottomNavigationView;
     NavController navController;
@@ -45,6 +44,17 @@ public class MainActivity extends AppCompatActivity {
         initializePlaces();
         setupAutoCompleteSupportFragment();
 
+    }
+
+    public void addListener(PlaceListener listener){
+        placeListeners.add(listener);
+        if(place != null){
+            listener.onPlace(place);
+        }
+    }
+
+    public void removeListener(PlaceListener listener){
+        placeListeners.remove(listener);
     }
 
     private void initializePlaces(){
@@ -73,24 +83,13 @@ public class MainActivity extends AppCompatActivity {
                 Place.Field.RATING));
 
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-
-                // TODO: Get info about the selected place.
-                place.getId();
-                String name = place.getName();
-                LatLng inputLatLng =  place.getLatLng();
-                place.getAddress();
-                place.getOpeningHours();
-                place.getPhotoMetadatas();
-                place.getRating();
-
-                Bundle args = new Bundle();
-                args.putParcelable("LatLng", inputLatLng);
-                args.putString("Name", name);
-                MapViewFragment fragment = new MapViewFragment();
-                fragment.setArguments(args);
-                //fragment.loadMap();
+                for (PlaceListener listener : placeListeners){
+                    listener.onPlace(place);
+                }
+                MainActivity.this.place = place;
             }
 
             @Override
