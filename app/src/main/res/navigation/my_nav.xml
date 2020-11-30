@@ -6,17 +6,17 @@
     app:startDestination="@id/mapViewFragment">
     <fragment
         android:id="@+id/mapViewFragment"
-        android:name="com.lousssouarn.edouard.go4lunch.fragment.MapViewFragment"
+        android:name="com.lousssouarn.edouard.go4lunch.view.fragment.MapViewFragment"
         android:label="fragment_map_view"
         tools:layout="@layout/fragment_map_view" />
     <fragment
         android:id="@+id/listViewFragment"
-        android:name="com.lousssouarn.edouard.go4lunch.fragment.ListViewFragment"
+        android:name="com.lousssouarn.edouard.go4lunch.view.fragment.ListViewFragment"
         android:label="fragment_list_view"
         tools:layout="@layout/fragment_list_view" />
     <fragment
         android:id="@+id/workmatesListFragment"
-        android:name="com.lousssouarn.edouard.go4lunch.fragment.WorkmatesListFragment"
+        android:name="com.lousssouarn.edouard.go4lunch.view.fragment.WorkmatesListFragment"
         android:label="fragment_workmates_list"
         tools:layout="@layout/fragment_workmates_list" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.lousssouarn.edouard.go4lunch.view;
+package com.lousssouarn.edouard.go4lunch.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -9,10 +9,27 @@
     <string name="response_sign_in_success" />
     <string name="response_sign_in_error" />
 
+    <!-- ITEM LIST RESTAURANTS -->
+    <string name="item_restaurant_name">Restaurant</string>
+    <string name="item_restaurant_address">Address</string>
+    <string name="item_restaurant_hours">Hours</string>
+    <string name="item_restaurant_distance">Distance</string>
+    <string name="item_restaurant_number_rating">(1)</string>
+
+    <!-- DETAILS RESTAURANT -->
+    <string name="details_restaurant_name">Restaurant</string>
+    <string name="details_restaurant_address">Address</string>
+    <string name="details_restaurant_call">CALL</string>
+    <string name="details_restaurant_like">LIKE</string>
+    <string name="details_restaurant_website">WEBSITE</string>
+    <string name="details_restaurant_added_favorites">Restaurant added to favorites</string>
+    <string name="details_restaurant_removed_favorites">Restaurant removed from favorites</string>
+    <string name="details_restaurant_website_no_application_found">No corresponding application found</string>
+    <string name="details_restaurant_no_website">This restaurant does not have a website</string>
+    <string name="details_restaurant_no_phone">This restaurant does not have a phone number</string>
+
     <!-- GOOGLE MAP -->
     <string name="api_key">AIzaSyCWUct2PRBITjwO_XKeePtRNruVd2S53sQ</string>
-
-
 
 
 </resources>

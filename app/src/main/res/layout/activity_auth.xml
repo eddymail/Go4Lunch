@@ -8,7 +8,7 @@
     android:backgroundTint="#CE090909"
     android:backgroundTintMode="src_over"
     android:orientation="vertical"
-    tools:context=".view.AuthActivity">
+    tools:context=".view.activities.AuthActivity">
 
     <ImageView
         android:id="@+id/imageView"

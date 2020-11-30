@@ -1,6 +1,8 @@
 package com.lousssouarn.edouard.go4lunch.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +13,25 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.libraries.places.api.model.Place;
 import com.lousssouarn.edouard.go4lunch.R;
+import com.lousssouarn.edouard.go4lunch.view.activities.RestaurantDetailsActivity;
 
 import java.util.List;
 
 public class ListViewAdapter extends RecyclerView.Adapter{
 
     //For Data
-    Context context;
+    private Context context;
     private List<Place> places ;
+    private RequestManager glide;
 
-    public ListViewAdapter(Context context, List<Place> places) {
+    public ListViewAdapter(Context context, List<Place> places, RequestManager glide) {
         this.context = context;
         this.places = places;
+        this.glide = glide;
     }
 
     @NonNull
@@ -38,11 +45,21 @@ public class ListViewAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        Place place = places.get(position);
         ListViewViewHolder listViewViewHolder = (ListViewViewHolder)holder;
-        listViewViewHolder.updatePlace(this.places.get(position));
-        listViewViewHolder.itemView.setOnClickListener(v -> {
-            Toast.makeText(context, "Item Selected", Toast.LENGTH_SHORT).show();
+        listViewViewHolder.updatePlace(this.places.get(position), glide);
+        listViewViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent displayRestaurantDetailsIntent = new Intent(v.getContext(), RestaurantDetailsActivity.class);
+                displayRestaurantDetailsIntent.putExtra("name",place.getName());
+                displayRestaurantDetailsIntent.putExtra("address",place.getAddress());
+                displayRestaurantDetailsIntent.putExtra("phone number",place.getPhoneNumber());
+                displayRestaurantDetailsIntent.putExtra("web site", place.getWebsiteUri());
+                v.getContext().startActivity(displayRestaurantDetailsIntent);
+            }
         });
+
     }
 
     @Override
@@ -51,7 +68,7 @@ public class ListViewAdapter extends RecyclerView.Adapter{
     }
 
 
-    class ListViewViewHolder extends RecyclerView.ViewHolder {
+   static class ListViewViewHolder extends RecyclerView.ViewHolder {
             TextView name, address, hours, distance, numberRating;
             ImageView picture, workmatesIcon, star1, star2, star3;
 
@@ -71,13 +88,14 @@ public class ListViewAdapter extends RecyclerView.Adapter{
 
         }
 
-       private void updatePlace(Place place) {
+       private void updatePlace(Place place, RequestManager glide) {
             name.setText(place.getName());
             address.setText(place.getAddress());
             //hours.setText((CharSequence) place.getOpeningHours());
-            //holder.distance.setText(place.);
+            //distance.setText(resultat);
             //numberRating.setText(place.getUserRatingsTotal());
-            //glide.load(place.getPhotoMetadatas()).apply(RequestOptions.centerCropTransform()).into(picture);
+            glide.load(place.getPhotoMetadatas()).apply(RequestOptions.centerCropTransform()).into(picture);
         }
+
     }
 }

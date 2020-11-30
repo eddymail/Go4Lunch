@@ -1,4 +1,4 @@
-package com.lousssouarn.edouard.go4lunch.view;
+package com.lousssouarn.edouard.go4lunch.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

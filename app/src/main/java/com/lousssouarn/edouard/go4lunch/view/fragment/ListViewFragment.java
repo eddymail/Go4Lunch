@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.libraries.places.api.model.Place;
 import com.lousssouarn.edouard.go4lunch.R;
 import com.lousssouarn.edouard.go4lunch.utils.CurrentPlacesListener;
@@ -26,9 +27,10 @@ import java.util.List;
  */
 public class ListViewFragment extends Fragment {
     //For data
-    List<Place> places;
-    RecyclerView recyclerView;
-    MainActivity mainActivity;
+    private List<Place> places;
+    private RecyclerView recyclerView;
+    private MainActivity mainActivity;
+    private ListViewAdapter adapter;
 
    private CurrentPlacesListener currentPlacesListener = new CurrentPlacesListener() {
         @Override
@@ -52,7 +54,7 @@ public class ListViewFragment extends Fragment {
         mainActivity.addCurrentPlacesListener(currentPlacesListener);
 
         recyclerView = v.findViewById(R.id.listRestaurant);
-        ListViewAdapter adapter = new ListViewAdapter(getContext(),places);
+        adapter = new ListViewAdapter(getContext(), places, Glide.with(this));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
@@ -70,12 +72,4 @@ public class ListViewFragment extends Fragment {
         super.onDestroyView();
         mainActivity.removeCurrentPlacesListener(currentPlacesListener);
     }
-
-  /*  @Override
-    public void onResume(){
-        super.onResume();
-        activity.recoverCurrentPlaces();
-        adapter.notifyDataSetChanged();
-    }
-    */
 }
