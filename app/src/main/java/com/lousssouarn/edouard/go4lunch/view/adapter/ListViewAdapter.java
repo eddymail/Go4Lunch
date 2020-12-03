@@ -85,16 +85,17 @@ public class ListViewAdapter extends RecyclerView.Adapter{
             star1 =itemView.findViewById(R.id.item_restaurant_star_1);
             star2 =itemView.findViewById(R.id.item_restaurant_star_2);
             star3 =itemView.findViewById(R.id.item_restaurant_star_3);
-
         }
 
        private void updatePlace(Place place, RequestManager glide) {
-            name.setText(place.getName());
-            address.setText(place.getAddress());
-            //hours.setText((CharSequence) place.getOpeningHours());
-            //distance.setText(resultat);
-            //numberRating.setText(place.getUserRatingsTotal());
-            glide.load(place.getPhotoMetadatas()).apply(RequestOptions.centerCropTransform()).into(picture);
+
+                name.setText(place.getName());
+                address.setText(place.getAddress());
+                //hours.setText((CharSequence) place.getOpeningHours());
+                //distance.setText(resultat);
+                //numberRating.setText(place.getUserRatingsTotal());
+                glide.load(place.getPhotoMetadatas()).apply(RequestOptions.centerCropTransform()).into(picture);
+
         }
 
     }

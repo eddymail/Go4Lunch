@@ -31,5 +31,10 @@
     <!-- GOOGLE MAP -->
     <string name="api_key">AIzaSyCWUct2PRBITjwO_XKeePtRNruVd2S53sQ</string>
 
+    <!-- BOTTOM NAVIGATION VIEW -->
+    <string name="bottom_navigation_menu_map_view">Map View</string>
+    <string name="bottom_navigation_menu_list_view">List View</string>
+    <string name="bottom_navigation_menu_workmates">Workmates</string>
+
 
 </resources>

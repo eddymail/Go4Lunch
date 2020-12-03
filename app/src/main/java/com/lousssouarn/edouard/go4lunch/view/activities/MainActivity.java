@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements PlaceSelectionLis
                 Place.Field.ADDRESS,
                 Place.Field.OPENING_HOURS,
                 Place.Field.PHOTO_METADATAS,
+                Place.Field.TYPES,
                 Place.Field.RATING));
 
         autocompleteFragment.setOnPlaceSelectedListener(this);
@@ -102,6 +103,9 @@ public class MainActivity extends AppCompatActivity implements PlaceSelectionLis
     @Override
     public void onPlaceSelected(@NonNull Place place) {
         for (PlaceListener listener : placeListeners) {
+
+            if (place.getTypes().contains(Place.Type.RESTAURANT) )
+
             listener.onPlace(place);
         }
 
@@ -120,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements PlaceSelectionLis
 
     public void recoverCurrentPlaces() {
         // Use fields to define the data types to return.
-        List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG);
+        List<Place.Field> placeFields = Arrays.asList(Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.PHOTO_METADATAS, Place.Field.TYPES);
         // Use the builder to create a FindCurrentPlaceRequest.
         FindCurrentPlaceRequest request = FindCurrentPlaceRequest.newInstance(placeFields);
         // Call findCurrentPlace and handle the response (first check that the user has granted permission).
@@ -138,8 +142,16 @@ public class MainActivity extends AppCompatActivity implements PlaceSelectionLis
         if (task.isSuccessful()) {
             // Task completed successfully
             FindCurrentPlaceResponse response = task.getResult();
+
             for (PlaceLikelihood placeLikelihood : response.getPlaceLikelihoods()) {
-                currentPlaces.add(placeLikelihood.getPlace());
+
+                final Place currentPlace = placeLikelihood.getPlace();
+
+                //Check if place is a restaurant
+                if (currentPlace.getTypes().contains(Place.Type.RESTAURANT) ) {
+                    currentPlaces.add(placeLikelihood.getPlace());
+                }
+
             }
             for (CurrentPlacesListener listener : currentPlacesListeners) {
                 listener.onPlaceList(currentPlaces);

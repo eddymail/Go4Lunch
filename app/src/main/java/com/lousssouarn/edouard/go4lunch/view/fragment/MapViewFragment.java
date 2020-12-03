@@ -165,8 +165,7 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
 
                         Log.e("Test", "CLIC");
 
-
-                        Intent displayRestaurantDetailsIntent = new Intent(getContext(), RestaurantDetailsActivity.class);
+                     /*   Intent displayRestaurantDetailsIntent = new Intent(getContext(), RestaurantDetailsActivity.class);
                         displayRestaurantDetailsIntent.putExtra("name", marker.getTitle());
                         displayRestaurantDetailsIntent.putExtra("address", marker.getPosition());
                         //displayRestaurantDetailsIntent.putExtra("phone number",place.getPhoneNumber());
@@ -176,7 +175,7 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
 
                         // Return false to indicate that we have not consumed the event and that we wish
                         // for the default behavior to occur (which is for the camera to move such that the
-                        // marker is centered and for the marker's info window to open, if it has one).
+                        // marker is centered and for the marker's info window to open, if it has one).*/
                         return false;
                     }
                 });
@@ -200,7 +199,7 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
         placeLocation.setLatitude(place.getLatLng().latitude);
         placeLocation.setLongitude(place.getLatLng().longitude);
 
-        float distanceResult = lastLocation.distanceTo(placeLocation);
+        float distanceResult = (float) (lastLocation.distanceTo(placeLocation) / 1000.0);
 
         return distanceResult;
 
@@ -232,17 +231,19 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
 
             getDistanceFromPlace(selectedPlace);
 
+            Log.e("Test",selectedPlace.getName() + getDistanceFromPlace(selectedPlace) + " m" );
+
         } else {
 
             if (!places.isEmpty()) {
                 for (Place place : places) {
-
-                    map.addMarker(new MarkerOptions()
-                            .position(place.getLatLng())
-                            .title(place.getName())
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_orange)));
-
-                    getDistanceFromPlace(place);
+                    if (place.getTypes().contains(Place.Type.RESTAURANT)) {
+                        map.addMarker(new MarkerOptions()
+                                .position(place.getLatLng())
+                                .title(place.getName())
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_orange)));
+                    }
+                    //getDistanceFromPlace(place);
                 }
             } else {
                 Log.e("Test", places.size() + " places est vide ");
