@@ -50,7 +50,6 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
     private LocationManager locationManager;
     private View mapView;
 
-    private Math math;
     public Location lastLocation;
     private LatLng userLatLng;
     private List<Place> places;
@@ -199,7 +198,7 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
         placeLocation.setLatitude(place.getLatLng().latitude);
         placeLocation.setLongitude(place.getLatLng().longitude);
 
-        float distanceResult = (float) (lastLocation.distanceTo(placeLocation) / 1000.0);
+        float distanceResult = (float) (lastLocation.distanceTo(placeLocation) / 100.0);
 
         return distanceResult;
 

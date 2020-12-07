@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -107,12 +107,14 @@
         <item name="android:layout_marginEnd">@dimen/item_restaurant_margin_end_illustration</item>
     </style>
 
-    <!-- DETAILS RESTAURANT -->
-
+    <!-- Details Restaurant -->
     <style name="details_txt_orange">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/details_restaurant_size_txt_orange</item>
     </style>
+
+    <!-- Autocomplete -->
+    <string name="autocomplete_hint">"Restaurant"</string>
 
 </resources>
