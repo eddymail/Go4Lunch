@@ -38,7 +38,7 @@ tools:context=".view.activities.RestaurantDetailsActivity">
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/choice_floatingActionButton"
+        android:id="@+id/detail_choice_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="339dp"
@@ -50,7 +50,7 @@ tools:context=".view.activities.RestaurantDetailsActivity">
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_choose_not_restaurant" />
+        app:srcCompat="@drawable/ic_not_go_restaurant" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -190,8 +190,8 @@ tools:context=".view.activities.RestaurantDetailsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/details_restaurant_recyclerview"
-        android:layout_width="409dp"
-        android:layout_height="275dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

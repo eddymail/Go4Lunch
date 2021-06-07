@@ -1,78 +1,69 @@
 package com.lousssouarn.edouard.go4lunch.model;
 
-class Restaurant {
-    private String name;
-    private String placeId;
-    private String picture;
-    private String address;
-    private String openingHours;
-    //private int distance;
-    private String location;
-    private double rating;
+import com.google.android.gms.maps.model.LatLng;
 
-    public Restaurant(String name, String placeId, String picture, String address, String openingHours, String location, double rating) {
+import java.util.List;
+
+public class Restaurant {
+    private String restaurantId;
+    private String name;
+    private String address;
+    private List<User> usersLikes;
+    private List<User> usersGoes;
+
+    public Restaurant() { }
+
+    public Restaurant(String restaurantId, String name, String address, List<User> usersLikes, List<User> usersGoes) {
+        this.restaurantId = restaurantId;
         this.name = name;
-        this.placeId = placeId;
-        this.picture = picture;
         this.address = address;
-        this.openingHours = openingHours;
-        this.location = location;
-        this.rating = rating;
+        this.usersLikes = usersLikes;
+        this.usersGoes = usersGoes;
+    }
+
+
+    // Getter
+
+
+    public String getRestaurantId() {
+        return restaurantId;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(String placeId) {
-        this.placeId = placeId;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
-
     public String getAddress() {
         return address;
+    }
+
+    public List<User> getUsersLikes() {
+        return usersLikes;
+    }
+
+    public List<User> getUsersGoes() {
+        return usersGoes;
+    }
+
+    // Setter
+
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getOpeningHours() {
-        return openingHours;
+    public void setUsersLikes(List<User> usersLikes) {
+        this.usersLikes = usersLikes;
     }
 
-    public void setOpeningHours(String openingHours) {
-        this.openingHours = openingHours;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setUsersGoes(List<User> usersGoes) {
+        this.usersGoes = usersGoes;
     }
 }

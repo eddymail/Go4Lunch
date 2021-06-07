@@ -2,13 +2,11 @@ package com.lousssouarn.edouard.go4lunch.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,14 +19,14 @@ import com.lousssouarn.edouard.go4lunch.view.activities.RestaurantDetailsActivit
 
 import java.util.List;
 
-public class ListViewAdapter extends RecyclerView.Adapter{
+public class RestaurantListViewAdapter extends RecyclerView.Adapter{
 
     //For Data
     private Context context;
     private List<Place> places ;
     private RequestManager glide;
 
-    public ListViewAdapter(Context context, List<Place> places, RequestManager glide) {
+    public RestaurantListViewAdapter(Context context, List<Place> places, RequestManager glide) {
         this.context = context;
         this.places = places;
         this.glide = glide;
@@ -39,27 +37,23 @@ public class ListViewAdapter extends RecyclerView.Adapter{
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_restaurant, parent, false);
-        ListViewViewHolder listViewViewHolder = new ListViewViewHolder(v);
-        return listViewViewHolder;
+        RestaurantListViewViewHolder restaurantListViewViewHolder = new RestaurantListViewViewHolder(v);
+        return restaurantListViewViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Place place = places.get(position);
-        ListViewViewHolder listViewViewHolder = (ListViewViewHolder)holder;
-        listViewViewHolder.updatePlace(this.places.get(position), glide);
-        listViewViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        RestaurantListViewViewHolder restaurantListViewViewHolder = (RestaurantListViewViewHolder)holder;
+        restaurantListViewViewHolder.updatePlace(this.places.get(position), glide);
+        restaurantListViewViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent displayRestaurantDetailsIntent = new Intent(v.getContext(), RestaurantDetailsActivity.class);
-                displayRestaurantDetailsIntent.putExtra("name",place.getName());
-                displayRestaurantDetailsIntent.putExtra("address",place.getAddress());
-                displayRestaurantDetailsIntent.putExtra("phone number",place.getPhoneNumber());
-                displayRestaurantDetailsIntent.putExtra("web site", place.getWebsiteUri());
+                displayRestaurantDetailsIntent.putExtra("PlaceId",place.getId());
                 v.getContext().startActivity(displayRestaurantDetailsIntent);
             }
         });
-
     }
 
     @Override
@@ -68,12 +62,11 @@ public class ListViewAdapter extends RecyclerView.Adapter{
     }
 
 
-   static class ListViewViewHolder extends RecyclerView.ViewHolder {
+   static class RestaurantListViewViewHolder extends RecyclerView.ViewHolder {
             TextView name, address, hours, distance, numberRating;
             ImageView picture, workmatesIcon, star1, star2, star3;
 
-
-        public ListViewViewHolder(@NonNull View itemView) {
+        public RestaurantListViewViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.item_restaurant_name_txt);
             address = itemView.findViewById(R.id.item_restaurant_address_txt);
@@ -91,12 +84,25 @@ public class ListViewAdapter extends RecyclerView.Adapter{
 
                 name.setText(place.getName());
                 address.setText(place.getAddress());
-                //hours.setText((CharSequence) place.getOpeningHours());
+                updateHours(place);
                 //distance.setText(resultat);
                 //numberRating.setText(place.getUserRatingsTotal());
                 glide.load(place.getPhotoMetadatas()).apply(RequestOptions.centerCropTransform()).into(picture);
 
         }
 
+        private void updateDistance(){
+
+
+        }
+
+        private void updateHours(Place place){
+            if(place.isOpen() != null && place.isOpen())
+            {
+                hours.setText(R.string.list_restaurants_open_now);
+            } else {
+                hours.setText(R.string.list_restaurants_close_now);
+            }
+        }
     }
 }

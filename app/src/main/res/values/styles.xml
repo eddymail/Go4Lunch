@@ -13,6 +13,29 @@
         <item name="colorPrimaryDark">#D7000000</item>
     </style>
 
+    <!-- Nav Drawer Txt -->
+    <style name="nav_drawer_txt">
+        <item name="android:textColor">@color/colorAccentWhite</item>
+    </style>
+
+    <!-- Nav Drawer Title -->
+    <style name="nav_drawer_title" parent="nav_drawer_txt">
+        <item name="android:textSize">@dimen/nav_drawer_size_title</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Nav Drawer Name -->
+    <style name="nav_drawer_name" parent="nav_drawer_txt">
+        <item name="android:textSize">@dimen/nav_drawer_size_name</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <!-- Nav Drawer Email -->
+    <style name="nav_drawer_email" parent="nav_drawer_txt">
+        <item name="android:textSize">@dimen/nav_drawer_size_email</item>
+    </style>
+
     <!-- Splash Activity -->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
       <item name="android:windowBackground">@drawable/background_splash</item>
@@ -114,7 +137,23 @@
         <item name="android:textSize">@dimen/details_restaurant_size_txt_orange</item>
     </style>
 
+    <!-- Item Restaurant Workmates Image -->
+    <style name="item_list_workmates_image">
+        <item name="android:src">@drawable/ic_person_outline_black_24dp</item>
+        <item name="android:layout_margin">@dimen/item_list_workmates_margin_image</item>
+    </style>
+
+    <!-- Item Restaurant Workmates Choose Txt -->
+    <style name="item_list_workmates_choose_txt">
+        <item name="android:layout_marginStart">@dimen/item_list_workmates_margin_start_txt</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorAccentDark</item>
+        <item name="android:textSize">@dimen/item_list_workmates_size_txt</item>
+    </style>
+
     <!-- Autocomplete -->
     <string name="autocomplete_hint">"Restaurant"</string>
+
+
 
 </resources>

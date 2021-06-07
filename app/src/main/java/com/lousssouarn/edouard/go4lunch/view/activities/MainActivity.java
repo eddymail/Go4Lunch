@@ -58,13 +58,13 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class MainActivity extends AppCompatActivity implements PlaceSelectionListener, OnCompleteListener<FindCurrentPlaceResponse>, NavigationView.OnNavigationItemSelectedListener {
 
     // For Data
-    Place place = null;
-    User currentUser;
+   private Place place = null;
+   private User currentUser;
     static HashMap <Place, LatLng> hashMap = new HashMap<>();
-    List<PlaceListener> placeListeners = new ArrayList<>();
-    List<Place> currentPlaces = new ArrayList<>();
-    List<CurrentPlacesListener> currentPlacesListeners = new ArrayList<>();
-    String uId;
+    private List<PlaceListener> placeListeners = new ArrayList<>();
+    private List<Place> currentPlaces = new ArrayList<>();
+    private List<CurrentPlacesListener> currentPlacesListeners = new ArrayList<>();
+    private String uId;
 
     // The entry point to the Places API.
     private PlacesClient placesClient;
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements PlaceSelectionLis
         switch (id)
         {
             case R.id.menu_drawer_lunch :
-                showLunch();
+                    showLunch();
                 break;
             case R.id.menu_drawer_settings :
 

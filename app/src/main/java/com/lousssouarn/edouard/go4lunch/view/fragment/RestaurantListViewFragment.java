@@ -16,21 +16,21 @@ import com.google.android.libraries.places.api.model.Place;
 import com.lousssouarn.edouard.go4lunch.R;
 import com.lousssouarn.edouard.go4lunch.utils.CurrentPlacesListener;
 import com.lousssouarn.edouard.go4lunch.view.activities.MainActivity;
-import com.lousssouarn.edouard.go4lunch.view.adapter.ListViewAdapter;
+import com.lousssouarn.edouard.go4lunch.view.adapter.RestaurantListViewAdapter;
 
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ListViewFragment#} factory method to
+ * Use the {@link RestaurantListViewFragment#} factory method to
  * create an instance of this fragment.
  */
-public class ListViewFragment extends Fragment {
+public class RestaurantListViewFragment extends Fragment {
     //For data
     private List<Place> places;
     private RecyclerView recyclerView;
     private MainActivity mainActivity;
-    private ListViewAdapter adapter;
+    private RestaurantListViewAdapter adapter;
 
    private CurrentPlacesListener currentPlacesListener = new CurrentPlacesListener() {
         @Override
@@ -39,7 +39,6 @@ public class ListViewFragment extends Fragment {
             places = currentPlaces;
         }
     };
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class ListViewFragment extends Fragment {
         mainActivity.addCurrentPlacesListener(currentPlacesListener);
 
         recyclerView = v.findViewById(R.id.listRestaurant);
-        adapter = new ListViewAdapter(getContext(), places, Glide.with(this));
+        adapter = new RestaurantListViewAdapter(getContext(), places, Glide.with(this));
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 

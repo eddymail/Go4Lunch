@@ -155,26 +155,14 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
                 lastLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 userLatLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
                 //clear old location marker in google map
-
                 map.clear();
 
                 map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override
                     public boolean onMarkerClick(final Marker marker) {
 
-                        Log.e("Test", "CLIC");
+                        lunchRestaurantDetailsActivity(marker);
 
-                     /*   Intent displayRestaurantDetailsIntent = new Intent(getContext(), RestaurantDetailsActivity.class);
-                        displayRestaurantDetailsIntent.putExtra("name", marker.getTitle());
-                        displayRestaurantDetailsIntent.putExtra("address", marker.getPosition());
-                        //displayRestaurantDetailsIntent.putExtra("phone number",place.getPhoneNumber());
-                        //displayRestaurantDetailsIntent.putExtra("web site", place.getWebsiteUri());
-                        getContext().startActivity(displayRestaurantDetailsIntent);
-                        //marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_green));
-
-                        // Return false to indicate that we have not consumed the event and that we wish
-                        // for the default behavior to occur (which is for the camera to move such that the
-                        // marker is centered and for the marker's info window to open, if it has one).*/
                         return false;
                     }
                 });
@@ -191,14 +179,24 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
 
     }
 
-     public float getDistanceFromPlace(Place place) {
+    private void lunchRestaurantDetailsActivity(Marker marker) {
+
+        LatLng position = marker.getPosition();
+        Intent intent = new Intent(getContext(), RestaurantDetailsActivity.class);
+        intent.putExtra("Position", position);
+        startActivity(intent);
+
+
+    }
+
+    private float getDistanceFromPlace(Place place) {
 
         Location placeLocation = new Location("restaurant");
 
         placeLocation.setLatitude(place.getLatLng().latitude);
         placeLocation.setLongitude(place.getLatLng().longitude);
 
-        float distanceResult = (float) (lastLocation.distanceTo(placeLocation) / 100.0);
+        float distanceResult = (float) (lastLocation.distanceTo(placeLocation));
 
         return distanceResult;
 
@@ -232,6 +230,7 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
 
             Log.e("Test",selectedPlace.getName() + getDistanceFromPlace(selectedPlace) + " m" );
 
+
         } else {
 
             if (!places.isEmpty()) {
@@ -242,7 +241,12 @@ public class MapViewFragment extends Fragment implements LocationListener, View.
                                 .title(place.getName())
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_orange)));
                     }
-                    //getDistanceFromPlace(place);
+                    getDistanceFromPlace(place);
+                    Log.e("Test",place.getName() + getDistanceFromPlace(place) + " m" );
+                    Log.e("Test",place.getName() + " " + place.getAddress() + " / " );
+                    Log.e("Test",place.getName() + " " + place.isOpen() + " / " );
+                    Log.e("Test",place.getName() + " " + place.getPhoneNumber() + " / " );
+                    Log.e("Test",place.getName() + " " + place.getTypes() + " /");
                 }
             } else {
                 Log.e("Test", places.size() + " places est vide ");

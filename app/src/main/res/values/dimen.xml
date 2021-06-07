@@ -11,6 +11,21 @@
     <dimen name="auth_activity_height_image">180dp</dimen>
     <dimen name="auth_activity_margin_top_image">58dp</dimen>
     <dimen name="auth_activity_margin_button">32dp</dimen>
+    <dimen name="main_activity_height_image_logo">120sp</dimen>
+
+
+
+    <!-- NAVIGATION DRAWER -->
+    <dimen name="nav_drawer_size_header">300dp</dimen>
+    <dimen name="nav_drawer_size_title">40sp</dimen>
+    <dimen name="nav_drawer_size_name">16sp</dimen>
+    <dimen name="nav_drawer_size_email">12sp</dimen>
+    <dimen name="nav_drawer_marginTop_title">50dp</dimen>
+
+    <!-- NAVIGATION HEADER -->
+    <dimen name="nav_header_margin_default">16dp</dimen>
+    <dimen name="nav_header_margin_image">32dp</dimen>
+    <dimen name="nav_header_margin_txt">8dp</dimen>
 
     <!-- ITEM LIST RESTAURANT -->
     <dimen name="item_restaurant_size_name">18sp</dimen>
@@ -29,6 +44,12 @@
     <dimen name="item_list_restaurant_height_people_rating">30dp</dimen>
     <dimen name="item_list_restaurant_size_image_illustration">100dp</dimen>
 
+    <!-- ITEM LIST WORKATES -->
+    <dimen name="item_list_workmates_size_txt">16sp</dimen>
+    <dimen name="item_list_workmates_height_image">80dp</dimen>
+    <dimen name="item_list_workmates_margin_image">10dp</dimen>
+    <dimen name="item_list_workmates_margin_start_txt">20dp</dimen>
+
     <!-- DETAILS RESTAURANT -->
     <dimen name="details_restaurant_margin_txt">12dp</dimen>
     <dimen name="details_restaurant_size_address">12sp</dimen>
@@ -41,6 +62,10 @@
     <dimen name="details_restaurant_margin_fab">16dp</dimen>
     <dimen name="details_restaurant_size_txt_no_restaurant">32sp</dimen>
     <dimen name="details_restaurant_padding_txt_no_restaurant">32dp</dimen>
+
+    <!-- MAIN ACTIVITY -->
+    <dimen name="main_activity_nav_header_height">176dp</dimen>
+
 
 
 </resources>

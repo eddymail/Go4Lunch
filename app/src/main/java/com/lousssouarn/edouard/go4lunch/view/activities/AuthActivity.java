@@ -1,17 +1,27 @@
 package com.lousssouarn.edouard.go4lunch.view.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.lousssouarn.edouard.go4lunch.R;
+import com.lousssouarn.edouard.go4lunch.api.UserFirebase;
+import com.lousssouarn.edouard.go4lunch.model.Restaurant;
 
 import java.util.Collections;
+import java.util.List;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -34,6 +44,7 @@ public class AuthActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startSignInWithGoogle();
+
             }
         });
 
@@ -41,6 +52,7 @@ public class AuthActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startSignInWithFacebook();
+
             }
         });
     }
@@ -80,6 +92,7 @@ public class AuthActivity extends AppCompatActivity {
         {
             if (resultCode == RESULT_OK)
             {
+                createUserInFireStore();
                 Toast.makeText(getApplicationContext(), getResources().getString(R.string.response_sign_in_success),Toast.LENGTH_SHORT ).show();
                 startMainActivity();
             }
@@ -89,6 +102,40 @@ public class AuthActivity extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     * Use it for recover the current user
+     */
+    @Nullable
+    protected FirebaseUser getCurrentUser(){ return  FirebaseAuth.getInstance().getCurrentUser(); }
+
+    /**
+     * Use it for add the new user in FireStore
+     */
+    private void createUserInFireStore(){
+
+       if(getCurrentUser() != null){
+
+           String uId  =FirebaseAuth.getInstance().getCurrentUser().getUid();
+           String name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+           String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+           String urlPicture = (this.getCurrentUser().getPhotoUrl() != null) ? this.getCurrentUser().getPhotoUrl().toString() : null;
+           String goRestaurant = "";
+           List<Restaurant> favorites = null;
+
+           UserFirebase.createUser(uId, name, email, urlPicture, goRestaurant, favorites ).addOnFailureListener(this.onFailureListener());
+       }
+    }
+
+    protected OnFailureListener onFailureListener(){
+        return new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), getString(R.string.error_unknown_error), Toast.LENGTH_LONG).show();
+            }
+        };
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -100,4 +147,7 @@ public class AuthActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {}
 }

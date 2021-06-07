@@ -8,17 +8,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.lousssouarn.edouard.go4lunch.R;
 
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
+
         checkIfUserLogged();
     }
 
     /**
-     * If User is logged lauch MainActivity, if not lauch AuthActivity
+     * If User is logged launch MainActivity, if not launch AuthActivity
      */
     public void checkIfUserLogged() {
         if (this.isCurrentUserLogged()) {

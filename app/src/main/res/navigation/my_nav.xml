@@ -11,7 +11,7 @@
         tools:layout="@layout/fragment_map_view" />
     <fragment
         android:id="@+id/listViewFragment"
-        android:name="com.lousssouarn.edouard.go4lunch.view.fragment.ListViewFragment"
+        android:name="com.lousssouarn.edouard.go4lunch.view.fragment.RestaurantListViewFragment"
         android:label="fragment_list_view"
         tools:layout="@layout/fragment_list_view" />
     <fragment
